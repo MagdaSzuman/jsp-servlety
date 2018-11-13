@@ -1,0 +1,19 @@
+<web-app>
+    <servlet>
+        <servlet-name>HomeServlet</servlet-name>
+        <servlet-class>com.sda.servlets.HomeServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CalculatorServlet</servlet-name>
+        <servlet-class>com.sda.servlets.CalculatorServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>HomeServlet</servlet-name>
+        <url-pattern>/hello-world</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CalculatorServlet</servlet-name>
+        <url-pattern>/calculator</url-pattern>
+    </servlet-mapping>
+</web-app>
