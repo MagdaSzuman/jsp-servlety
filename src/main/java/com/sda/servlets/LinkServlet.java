@@ -7,13 +7,18 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-public class HomeServlet extends HttpServlet {
+public class LinkServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter writer = resp.getWriter();
 
-        writer.println("<h1>Hello world</h1>");
-        writer.println("<h1>How are you?</h1>");
-        writer.println("<h1>Ble ble ble</h1>");
+        resp.addHeader("Content-Type", "text/html");
+
+        writer.println("<br/>\n" +
+                "\t<a href =\"https://www.google.pl\">Google</a>\n" +
+                "<br/>\n" +
+                "\t<a href =\"https://www.onet.pl/\">Onet</a>\t\n" +
+                "<br/>\n" +
+                "\t<a href =\"https://www.wp.pl/\">Wp</a>\t"    );
     }
 }

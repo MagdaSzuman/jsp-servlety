@@ -7,6 +7,10 @@
         <servlet-name>CalculatorServlet</servlet-name>
         <servlet-class>com.sda.servlets.CalculatorServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LinkServlet</servlet-name>
+        <servlet-class>com.sda.servlets.LinkServlet</servlet-class>
+    </servlet>
 
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
@@ -15,5 +19,9 @@
     <servlet-mapping>
         <servlet-name>CalculatorServlet</servlet-name>
         <url-pattern>/calculator</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LinkServlet</servlet-name>
+        <url-pattern>/link</url-pattern>
     </servlet-mapping>
 </web-app>

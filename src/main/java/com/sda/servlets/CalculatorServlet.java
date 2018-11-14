@@ -13,9 +13,7 @@ public class CalculatorServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.addHeader("Content-Type", "text/html");
-        Integer a = mapToInt(req.getParameter("a"));
-        Integer b = mapToInt(req.getParameter("b"));
-        String operation = req.getParameter("operation");
+
         String message = req.getParameter("message");
 
         PrintWriter writer = resp.getWriter();
@@ -23,6 +21,15 @@ public class CalculatorServlet extends HttpServlet {
         createMessage(message, writer);
         createForm(writer);
 
+        if (req.getParameter("a")!= null && req.getParameter("b")!= null && req.getParameter("operation")!= null ) {
+            handleCalculation(req, resp, writer);
+        }
+    }
+
+    private void handleCalculation(HttpServletRequest req, HttpServletResponse resp, PrintWriter writer) throws IOException {
+        Integer a = mapToInt(req.getParameter("a"));
+        Integer b = mapToInt(req.getParameter("b"));
+        String operation = req.getParameter("operation");
         writer.print("Result: ");
         if ("+".equals(operation)) {
             writer.println(a + b);
