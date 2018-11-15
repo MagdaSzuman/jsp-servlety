@@ -1,15 +1,13 @@
 package com.sda.servlets.users;
 
-import com.sda.servlets.Link;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class UsersServlet extends HttpServlet {
     private UsersService usersService;
@@ -50,9 +48,12 @@ public class UsersServlet extends HttpServlet {
             writer.println("<p style=\"color:red;\">" + errorMessage + "</p>");
         }
 
-        createForm(writer);
+        createCreationForm(writer);
+        writer.println("<br>");
+        createQueryForm(writer);
+        String query = Optional.ofNullable(req.getParameter("q")).orElse("");
         writer.println("Nasi uzytkownicy");
-        List<User> users = usersService.findAll();
+        List<User> users = usersService.findByQuery(query);
 
         /*
         for (User user:users){
@@ -66,13 +67,22 @@ public class UsersServlet extends HttpServlet {
         */
         for (int i = 0; i < users.size(); i++) {
             User user = users.get(i);
-            writer.println("<a href=\"" + req.getContextPath() + req.getServletPath() + "/" + i + "\">");
+            writer.println("<a href=\"" + req.getContextPath() + req.getServletPath() + "/" + user.getId() + "\">");
             writer.println("<p>" + user.getFirstName() + " " + user.getLastName() +"</p>");
             writer.println("</a>");
         }
     }
 
-    private void createForm(PrintWriter writer) {
+    private void createQueryForm(PrintWriter writer) {
+        String queryForm = "<form action=\"\" method=\"get\">\n" +
+                "    Search: <input type=\"text\" name=\"q\">\n" +
+                "    <br>\n" +
+                "    <input type=\"submit\">\n" +
+                "</form>";
+        writer.println(queryForm);
+    }
+
+    private void createCreationForm(PrintWriter writer) {
         String form = "<form action=\"\" method=\"post\">\n" +
                 "    FirstName: <input type=\"text\" name=\"firstName\">\n" +
                 "    <br>\n" +

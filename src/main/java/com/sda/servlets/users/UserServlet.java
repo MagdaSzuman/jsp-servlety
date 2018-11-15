@@ -20,8 +20,15 @@ public class UserServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String pathInfo = req.getPathInfo();
         Integer id = Integer.valueOf(pathInfo.substring(1));
-        User user = usersService.findById(id);
-        displayUser(user, resp.getWriter());
+        PrintWriter writer = resp.getWriter();
+        try {
+            User user = usersService.findById(id);
+            displayUser(user, writer);
+        } catch (UserNotFoundException e){
+            writer.println(e.getMessage());
+            resp.setStatus(404); // 404 rzucamy kiedy nie ma zasobu, a nie kiedy zasób jest pusty.
+            // Jeśli jest zasób pusty, to zwracamy 200
+        }
     }
 
     private void displayUser(User user, PrintWriter writer){
