@@ -1,4 +1,4 @@
-package com.sda.servlets;
+package com.sda.servlets.links;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -6,20 +6,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
-public class LinkServlet extends HttpServlet {
+public class LinksServlet extends HttpServlet {
 
-    private List<Link> links;
+    private LinksService linksService;
 
     @Override
     public void init() throws ServletException {
-        this.links = new ArrayList<>();
-
-        links.add(new Link("https://www.google.pl", "Google"));
-        links.add(new Link("https://www.onet.pl", "Onet"));
-        links.add(new Link("https://www.wp.pl", "Wp"));
+        this.linksService =LinksService.instanceOf();
     }
 
     @Override
@@ -35,13 +31,27 @@ public class LinkServlet extends HttpServlet {
             writer.println("<p style=\"color:red;\">" + errorMessage + "</p>");
         }
 
-        createForm(writer);
-
+        createCreationForm(writer);
+        writer.println("<br>");
+        createQueryForm(writer);
+        String query = Optional.ofNullable(req.getParameter("q")).orElse("");
         writer.println("Moje linki:");
-        for (Link link : links) {
+        List<Link> links = linksService.findByQuery(query);
+
+//        for (int i = 0; i < links.size(); i++) {
+//            Link link = links.get(i);
+//            writer.println("<a href=\"" + req.getContextPath() + req.getServletPath() + "/" + link.getId() + "\">");
+//            writer.println("<p>" + link.getText() +"</p>");
+//            writer.println("</a>");
+//        }
+
+
+
+        for (Link link : linksService.findAll()) {
             writer.println("<br/>");
             writer.println("<a href=\"" + link.getUrl() + "\">" + link.getText() + "</a>");
         }
+
         writer.println("</div>");
         /*
         writer.println("<br/>");
@@ -53,7 +63,7 @@ public class LinkServlet extends HttpServlet {
         */
     }
 
-    private void createForm(PrintWriter writer) {
+    private void createCreationForm(PrintWriter writer) {
         String form = "<form action=\"\" method=\"post\">\n" +
                 "    Link: <input type=\"text\" name=\"link\">\n" +
                 "    <br>\n" +
@@ -62,6 +72,15 @@ public class LinkServlet extends HttpServlet {
                 "    <input type=\"submit\"> \n" +
                 "</form>";
         writer.println(form);
+    }
+
+    private void createQueryForm(PrintWriter writer) {
+        String queryForm = "<form action=\"\" method=\"get\">\n" +
+                "    Search: <input type=\"text\" name=\"q\">\n" +
+                "    <br>\n" +
+                "    <input type=\"submit\">\n" +
+                "</form>";
+        writer.println(queryForm);
     }
 
     @Override
@@ -77,7 +96,12 @@ public class LinkServlet extends HttpServlet {
             // resp.sendRedirect(req.getContextPath() + req.getServletPath() + "?error_message=Bledne dane");
         } else {
             Link linkObject = new Link(link, text);
+            linksService.save(linkObject);
+
+            /*
+            Link linkObject = new Link(link, text);
             links.add(linkObject);
+            */
             // resp.sendRedirect(req.getContextPath() + req.getServletPath());
         }
         resp.sendRedirect(redirectBuilder.toString());

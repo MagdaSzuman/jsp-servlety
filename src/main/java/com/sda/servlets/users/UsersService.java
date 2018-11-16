@@ -2,6 +2,7 @@ package com.sda.servlets.users;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class UsersService {
     private static UsersService instance;
@@ -64,5 +65,11 @@ public class UsersService {
             }
         }
         return usersToReturn;
+    }
+
+    public void delete(Integer id) {
+        this.users = users.stream()
+                .filter(e->!e.getId().equals(id))
+                .collect(Collectors.toList());
     }
 }

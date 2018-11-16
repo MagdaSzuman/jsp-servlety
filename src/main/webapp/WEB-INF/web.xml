@@ -8,8 +8,12 @@
         <servlet-class>com.sda.servlets.CalculatorServlet</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>LinksServlet</servlet-name>
+        <servlet-class>com.sda.servlets.links.LinksServlet</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>LinkServlet</servlet-name>
-        <servlet-class>com.sda.servlets.LinkServlet</servlet-class>
+        <servlet-class>com.sda.servlets.links.LinkServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>UsersServlet</servlet-name>
@@ -29,8 +33,12 @@
         <url-pattern>/calculator</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>LinkServlet</servlet-name>
+        <servlet-name>LinksServlet</servlet-name>
         <url-pattern>/link</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LinkServlet</servlet-name>
+        <url-pattern>/link/*</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>UsersServlet</servlet-name>

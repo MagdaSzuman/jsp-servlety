@@ -50,6 +50,12 @@ public class UserServlet extends HttpServlet {
         usersService.save(user);
     }
 
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Integer id = Integer.valueOf(req.getPathInfo().substring(1));
+        usersService.delete(id);
+    }
+
     private void displayUser(User user, PrintWriter writer){
         writer.println(user.getFirstName() + " " + user.getLastName());
         writer.println("Gender: " + user.getGender());
