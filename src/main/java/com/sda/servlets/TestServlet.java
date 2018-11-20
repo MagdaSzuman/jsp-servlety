@@ -5,18 +5,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Arrays;
 
-public class HomeServlet extends HttpServlet {
+public class TestServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        PrintWriter writer = resp.getWriter();
-//
-//        writer.println("<h1>Hello world</h1>");
-//        writer.println("<h1>How are you?</h1>");
-//        writer.println("<h1>Ble ble ble</h1>");
+        req.setAttribute("message", "Ala ma kota");
         req.setAttribute("names", Arrays.asList("Jan", "Anna", "Maria"));
-        req.getRequestDispatcher("index.jsp").forward(req,resp);
+
+        req.setAttribute("url", "https://www.google.pl/");
+        req.setAttribute("text", "Google");
+
+        req.setAttribute("age", 15);
+        req.setAttribute("age2", 20);
+
+        req.getRequestDispatcher("test.jsp").forward(req, resp);
     }
 }
