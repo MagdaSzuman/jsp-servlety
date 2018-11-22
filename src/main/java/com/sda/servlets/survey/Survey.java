@@ -3,12 +3,14 @@ package com.sda.servlets.survey;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.util.List;
 
 @Builder
 @Getter
 @Setter
+@ToString
 public class Survey {
     private Integer id;
     private String title;

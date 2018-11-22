@@ -1,18 +1,15 @@
 package com.sda.servlets.survey;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
-public class SurveyFromDto {
+public class SurveyFormDto {
     private String title;
     private String description;
     private Map<String, SurveyQuestion> questions;
 
-    public static SurveyFromDto fromRequest(HttpServletRequest request) {
-        SurveyFromDto surveyFromDto = new SurveyFromDto();
+    public static SurveyFormDto fromRequest(HttpServletRequest request) {
+        SurveyFormDto surveyFormDto = new SurveyFormDto();
         Map<String, String[]> parameterMap = request.getParameterMap();
         Map<String, SurveyQuestion> questions = new HashMap<>();
         //TODO przechodzenie po mapie przy uzyciu seta
@@ -24,13 +21,30 @@ public class SurveyFromDto {
                 SurveyQuestion surveyQuestion = addIfNeeded(questions, questionId);
                 handleRestOfParam(surveyQuestion, key.substring("question".length() + 1), value);
             } else if ("title".equals(key)) {
-                surveyFromDto.title = value;
+                surveyFormDto.title = value;
             } else if ("description".equals(key)) {
-                surveyFromDto.description = value;
+                surveyFormDto.description = value;
             }
         }
-        surveyFromDto.questions = questions;
-        return surveyFromDto;
+        surveyFormDto.questions = questions;
+        return surveyFormDto;
+    }
+
+    public Survey toDomain(){
+        return Survey.builder()
+                .title(this.title)
+                .description(this.description)
+                .questions(mapToList(questions))
+                .build();
+    }
+
+    private List<SurveyQuestion> mapToList(Map<String, SurveyQuestion> questions) {
+        List<SurveyQuestion> list = new ArrayList<>();
+        for (Map.Entry<String, SurveyQuestion> entry : questions.entrySet()){
+            int index = Integer.valueOf(entry.getKey())-1;
+            list.add(index, entry.getValue());
+        }
+        return list;
     }
 
     private static void handleRestOfParam(SurveyQuestion surveyQuestion, String key, String value) {

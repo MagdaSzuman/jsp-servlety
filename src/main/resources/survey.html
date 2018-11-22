@@ -1,0 +1,166 @@
+<html>
+
+<head>
+    <style>
+
+        .survey-container {
+            display: flex;
+            flex-direction: column;
+            /*min-width: 300px;*/
+            max-width: 750px;
+            background-color: lightgray;
+            border: 1px solid black;
+            border-radius: 5px;
+            padding: 10px;
+        }
+
+        .survey-header {
+            background-color: gray;
+            color: white;
+            font-weight: bold;
+            padding: 10px;
+        }
+
+        .survey-header h1 {
+            margin: 0px;
+        }
+
+        .survey-header h6 {
+            margin-bottom: 0px;
+            margin-top: 6px;
+        }
+
+        .survey-questions {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .survey-question {
+            width: 300px;
+            margin: 10px;
+            background-color: gray;
+        }
+
+        .survey-question ul {
+            margin-top: 0px;
+        }
+
+        .survey-question-header {
+            display: flex;
+            justify-content: center;
+        }
+
+        .survey-question-header h4 {
+            margin: 10px 0px;
+
+            /*margin: 10px 0px 10px;*/
+            /*margin: 10px 0px 10px 0px;*/
+            /*margin-top: 10px;*/
+            /*margin-bottom: 10px;*/
+            /*tak samo można sie bawić z paddingiem*/
+        }
+
+        .survey-title {
+            display: flex;
+            justify-content: center;
+        }
+
+        #content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+    </style>
+</head>
+
+<body>
+<div id="content">
+    <div class="survey-container">
+        <div class="survey-header">
+            <div class="survey-title">
+                <h1>Tytul ankiety</h1>
+            </div>
+            <h6>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum delectus dolorum, ipsa natus optio
+                possimus
+                quidem sequi temporibus vero voluptatum.</h6>
+        </div>
+
+        <div class="survey-questions">
+            <div class="survey-question">
+                <div class="survey-question-header">
+                    <h4>Tytuł pytania 1</h4>
+                </div>
+                <ul>
+                    <li>Odpowiedz 1</li>
+                    <li>Odpowiedz 2</li>
+                    <li>Odpowiedz 3</li>
+                    <li>Odpowiedz 4</li>
+                </ul>
+            </div>
+            <div class="survey-question">
+                <div class="survey-question-header">
+                    <h4>Tytuł pytania 2</h4>
+                </div>
+                <ul>
+                    <li>Odpowiedz 1</li>
+                    <li>Odpowiedz 2</li>
+                    <li>Odpowiedz 3</li>
+                    <li>Odpowiedz 4</li>
+                </ul>
+            </div>
+            <div class="survey-question">
+                <div class="survey-question-header">
+                    <h4>Tytuł pytania 3</h4>
+                </div>
+                <ul>
+                    <li>Odpowiedz 1</li>
+                    <li>Odpowiedz 2</li>
+                    <li>Odpowiedz 3</li>
+                    <li>Odpowiedz 4</li>
+                </ul>
+            </div>
+            <div class="survey-question">
+                <div class="survey-question-header">
+                    <h4>Tytuł pytania 4</h4>
+                </div>
+                <ul>
+                    <li>Odpowiedz 1</li>
+                    <li>Odpowiedz 2</li>
+                    <li>Odpowiedz 3</li>
+                    <li>Odpowiedz 4</li>
+                </ul>
+            </div>
+            <div class="survey-question">
+                <div class="survey-question-header">
+                    <h4>Tytuł pytania 5</h4>
+                </div>
+                <ul>
+                    <li>Odpowiedz 1</li>
+                    <li>Odpowiedz 2</li>
+                    <li>Odpowiedz 3</li>
+                    <li>Odpowiedz 4</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="new-question-form">
+
+        <form action="" method="post">
+        <div>
+            Text: <input type="text" name="text"><br>
+        </div>
+        <div>
+            Answers:<input type="text" name="answer1">,
+            <input type="text" name="answer2">,
+            <input type="text" name="answer3">,
+            <input type="text" name="answer4">
+        </div>
+        <input type="submit">
+        </form>
+    </div>
+</div>
+</body>
+</html>

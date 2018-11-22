@@ -33,7 +33,11 @@
     </servlet>
     <servlet>
         <servlet-name>SurveysServlet</servlet-name>
-        <jsp-file>/survey/surveys.jsp</jsp-file>
+        <servlet-class>com.sda.servlets.survey.SurveysServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SurveyServlet</servlet-name>
+        <servlet-class>com.sda.servlets.survey.SurveyServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -71,5 +75,9 @@
     <servlet-mapping>
         <servlet-name>SurveysServlet</servlet-name>
         <url-pattern>/surveys</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SurveyServlet</servlet-name>
+        <url-pattern>/surveys/*</url-pattern>
     </servlet-mapping>
 </web-app>
